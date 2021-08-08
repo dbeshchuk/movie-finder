@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import * as movieAPI from "../../services/movieApi";
+import shortid from "shortid";
 
 const Reviews = ({ movieId }) => {
   const [reviews, setReviews] = useState(null);
@@ -20,7 +21,7 @@ const Reviews = ({ movieId }) => {
       {reviews && (
         <ul>
           {reviews.map((result) => (
-            <li key={result.author}>
+            <li key={shortid.generate}>
               <h3>{result.author}</h3>
               <p>{result.content}</p>
             </li>
@@ -32,7 +33,7 @@ const Reviews = ({ movieId }) => {
 };
 
 Reviews.propTypes = {
-  movieId: PropTypes.number.isRequired,
+  movieId: PropTypes.string.isRequired,
 };
 
 export default Reviews;

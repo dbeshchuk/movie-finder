@@ -11,6 +11,7 @@ import * as movieAPI from "../services/movieApi";
 
 import Cast from "../components/Cast/Cast";
 import Reviews from "../components/Reviews/Reviews";
+import shortid from "shortid";
 
 const MovieDetailsPage = () => {
   const { url, path } = useRouteMatch();
@@ -60,7 +61,7 @@ const MovieDetailsPage = () => {
 
           <ul>
             {movieDetails.genres.map((genre) => (
-              <li>{genre.name}</li>
+              <li key={shortid.generate()}>{genre.name}</li>
             ))}
           </ul>
 

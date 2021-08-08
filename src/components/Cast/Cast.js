@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import * as movieAPI from "../../services/movieApi";
+import shortid from "shortid";
 
 const Cast = ({ movieId }) => {
   const [credits, setCredits] = useState(null);
@@ -16,7 +17,7 @@ const Cast = ({ movieId }) => {
       {credits && (
         <ul>
           {credits.map((actor) => (
-            <li key={actor.cast_id}>
+            <li key={shortid.generate()}>
               <img
                 src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
                 alt={`Didn't found`}
@@ -32,7 +33,7 @@ const Cast = ({ movieId }) => {
 };
 
 Cast.propTypes = {
-  movieId: PropTypes.number.isRequired,
+  movieId: PropTypes.string.isRequired,
 };
 
 export default Cast;
