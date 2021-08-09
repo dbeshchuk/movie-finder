@@ -1,25 +1,37 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useHistory } from "react-router-dom";
+
 import * as movieAPI from "../services/movieApi";
 
 const MoviesPage = () => {
   const [searchValue, setSearchValue] = useState("");
   const location = useLocation();
+  const history = useHistory();
   const [selectedMovies, setSelectedMovies] = useState(null);
 
   const onSearchSubmit = async (e) => {
     e.preventDefault();
 
-    if (searchValue) {
+    history.push({
+      pathname: location.pathname,
+      search: `query=${searchValue}`,
+    });
+  };
+
+  const getMoviesList = async (value) => {
+    if (value) {
       await movieAPI
-        .fetchSearchMovie(searchValue)
+        .fetchSearchMovie(value)
         .then((response) => setSelectedMovies(response.data.results));
     }
   };
 
-  // useEffect(() => {
-  //   console.log(selectedMovies);
-  // }, [selectedMovies]);
+  useEffect(() => {
+    if (location.search) {
+      const query = new URLSearchParams(location.search).get("query");
+      getMoviesList(query);
+    }
+  }, [location.search]);
 
   return (
     <>

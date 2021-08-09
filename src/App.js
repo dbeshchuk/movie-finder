@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 
 import "./App.css";
@@ -30,6 +30,8 @@ function App() {
           <Route path="/movies" exact component={MoviesPage} />
 
           <Route path="/movies/:movieId" component={MovieDetailsPage} />
+
+          <Redirect to="/" />
         </Switch>
       </Suspense>
     </div>

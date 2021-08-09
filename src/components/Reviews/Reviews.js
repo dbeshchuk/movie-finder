@@ -21,7 +21,7 @@ const Reviews = ({ movieId }) => {
       {reviews && (
         <ul>
           {reviews.map((result) => (
-            <li key={shortid.generate}>
+            <li key={shortid.generate()}>
               <h3>{result.author}</h3>
               <p>{result.content}</p>
             </li>
