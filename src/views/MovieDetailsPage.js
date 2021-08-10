@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   useParams,
   Route,
@@ -17,7 +17,7 @@ const MovieDetailsPage = () => {
   const { url, path } = useRouteMatch();
   const history = useHistory();
   const location = useLocation();
-
+  const { current } = useRef(location?.state?.from ?? "/");
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
 
@@ -27,17 +27,13 @@ const MovieDetailsPage = () => {
       .then((response) => setMovieDetails(response.data));
   }, [movieId]);
 
-  // useEffect(() => {
-  //   console.log(movieDetails);
-  // }, [movieDetails]);
-
-  const goBack = () => {
-    history.push(location?.state?.from ?? "/");
+  const onGoBack = () => {
+    history.push(current);
   };
 
   return (
     <>
-      <button type="button" className="back-button" onClick={goBack}>
+      <button type="button" className="back-button" onClick={onGoBack}>
         Go back
       </button>
       <br />
