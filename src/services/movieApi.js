@@ -16,13 +16,15 @@ async function mainFetch(url) {
     .catch((error) => console.log(error));
 }
 
-export function fetchTrending() {
-  return mainFetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}`);
+export function fetchTrending(page) {
+  return mainFetch(
+    `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`
+  );
 }
 
-export function fetchSearchMovie(searchQuery) {
+export function fetchSearchMovie(searchQuery, page) {
   return mainFetch(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&include_adult=false`
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&include_adult=false&page=${page}`
   );
 }
 

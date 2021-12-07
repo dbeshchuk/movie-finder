@@ -2,6 +2,8 @@ import React, { Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 
+import { Container } from "@mui/material";
+
 import "./App.css";
 
 const HomePage = lazy(() =>
@@ -20,7 +22,10 @@ const MovieDetailsPage = lazy(() =>
 
 function App() {
   return (
-    <div className="App">
+    <Container
+      className="App"
+      style={{ width: 1200, marginLeft: "auto", marginRight: "auto" }}
+    >
       <Navigation />
 
       <Suspense fallback={<h1>Loading...</h1>}>
@@ -34,7 +39,7 @@ function App() {
           <Redirect to="/" />
         </Switch>
       </Suspense>
-    </div>
+    </Container>
   );
 }
 
